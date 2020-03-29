@@ -11,6 +11,8 @@ function Book(title, author, pages, readYet) {
 }
 
 const LittleMermaid = new Book('Little Mermaid', 'Author here', 890, 0)
+const HarryPotter1 = new Book('Harry Potter & The', 'JK Rowling', 309, 1)
+const HarryPotter2 = new Book('Harry Potter 2', 'JK Rowling', 459, 1)
 console.log(LittleMermaid.info());
 
 function addBookToLibrary(newBook) {
@@ -50,4 +52,6 @@ function render(myLibrary, tableID){
 }
 
 addBookToLibrary(LittleMermaid)
+addBookToLibrary(HarryPotter1)
+addBookToLibrary(HarryPotter2)
 render(myLibrary, 'tableOfBooks');
