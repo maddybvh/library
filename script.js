@@ -10,9 +10,9 @@ function Book(title, author, pages, readYet) {
   }
 }
 
-const LittleMermaid = new Book('Little Mermaid', 'Author here', 890, 0)
-const HarryPotter1 = new Book('Harry Potter & The', 'JK Rowling', 309, 1)
-const HarryPotter2 = new Book('Harry Potter 2', 'JK Rowling', 459, 1)
+const LittleMermaid = new Book('Little Mermaid', 'Author here', 890, true)
+const HarryPotter1 = new Book('Harry Potter & The', 'JK Rowling', 309, false)
+const HarryPotter2 = new Book('Harry Potter 2', 'JK Rowling', 459, true)
 
 function addBookToLibrary(newBook) {
   myLibrary.push(newBook.info())
@@ -50,7 +50,34 @@ function render(myLibrary, tableID){
     }
 }
 
+//Use DOM Manipulation to clear the table of old results
+function clearTable(){
+    var tableHeaderRowCount = 1;
+    var table = document.getElementById('tableOfBooks');
+    var rowCount = table.rows.length;
+    for (var i = tableHeaderRowCount; i <= rowCount; i++) {
+        table.deleteRow(-1);
+    }
+}
+
 addBookToLibrary(LittleMermaid)
 addBookToLibrary(HarryPotter1)
 addBookToLibrary(HarryPotter2)
 render(myLibrary, 'tableOfBooks');
+
+//Event listener for add new book
+document.getElementById("addNewBookButton").addEventListener('click', (e) => {
+
+    title = document.getElementById("title").value;
+    author = document.getElementById("author").value;
+    pages = document.getElementById("pages").value;
+    readYet = document.getElementById("readYet").checked;
+    
+    let newBook = new Book(title, author, pages, readYet);
+    addBookToLibrary(newBook)
+
+    clearTable();
+    render(myLibrary, 'tableOfBooks')
+
+}
+);
