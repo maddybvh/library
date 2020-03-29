@@ -32,6 +32,7 @@ function render(myLibrary, tableID){
     var head1 = headRow.insertCell(1);
     var head2 = headRow.insertCell(2);
     var head3 = headRow.insertCell(3);
+    var head4 = headRow.insertCell(4);
 
     head0.innerHTML = "<b>Read?</b>";
     head1.innerHTML = "<b>Title</b>";
@@ -47,11 +48,14 @@ function render(myLibrary, tableID){
         let cell1 = row.insertCell(1);
         let cell2 = row.insertCell(2);
         let cell3 = row.insertCell(3);
+        let cell4 = row.insertCell(4);
 
         cell0.innerHTML = myLibrary[i][4];
         cell1.innerHTML = myLibrary[i][1];
         cell2.innerHTML = myLibrary[i][2];
         cell3.innerHTML = myLibrary[i][3];
+        cell4.innerHTML = "<button onclick='removeRow(this)'>x</button>";
+
     }
 }
 
@@ -83,8 +87,16 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
 
     clearTable();
     render(myLibrary, 'tableOfBooks')
+    
+    //For testing only
+    console.log(myLibrary)
 
 }
 );
 
-console.log(myLibrary)
+//Event listener for deleting books
+removeRow = function(cellToRemove) {
+    console.log("delete")
+    p=cellToRemove.parentNode.parentNode;
+    p.parentNode.removeChild(p);      
+}
