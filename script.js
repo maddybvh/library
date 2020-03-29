@@ -32,6 +32,7 @@ function render(myLibrary) {
 
         let x = document.createElement("INPUT");
         x.setAttribute("type", "checkbox");
+        x.setAttribute("class","readCheckbox")
         x.checked = book.readYet;
         
         cell0.appendChild(x);
@@ -42,6 +43,7 @@ function render(myLibrary) {
         cell4.innerHTML = "<button class='removeButton'>x</button>";
 
         addRemoveListeners();
+        addReadListeners();
     }    
 };
 
@@ -84,5 +86,25 @@ function removeBook(selectedRow) {
             myLibrary.splice(i, 1); 
         }
     }
+}
 
+function addReadListeners() {
+    document.querySelectorAll(".readCheckbox").forEach((input) =>{
+        input.addEventListener("click", () => {
+            console.log("read success")
+            toggleRead(input.parentElement.parentElement); // passes same row as remove button
+        })
+    })
+}
+
+function toggleRead(selectedRow) {
+    const bookTitle = selectedRow.children[1].innerHTML;
+    for (i = 0; i < myLibrary.length; i++) {   
+        if (myLibrary[i].title == bookTitle) {  
+                 
+            x = myLibrary[i].readYet
+            myLibrary[i].readYet = !x
+            console.log(myLibrary[i].readYet)
+        }
+    }    
 }
