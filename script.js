@@ -1,12 +1,17 @@
 let myLibrary = [];
+let totalBooks = 0;
 
 function Book(title, author, pages, readYet) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.readYet = readYet
-  this.info = function() {
-      return [this.title, this.author, this.pages, this.readYet]
+    
+    this.uid = totalBooks
+    totalBooks += 1
+
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.readYet = readYet
+    this.info = function() {
+        return [this.uid, this.title, this.author, this.pages, this.readYet]
   }
 }
 
@@ -15,7 +20,7 @@ const HarryPotter1 = new Book('Harry Potter & The', 'JK Rowling', 309, false)
 const HarryPotter2 = new Book('Harry Potter 2', 'JK Rowling', 459, true)
 
 function addBookToLibrary(newBook) {
-  myLibrary.push(newBook.info())
+  myLibrary.push(newBook.info());
 }
 
 function render(myLibrary, tableID){
@@ -28,10 +33,10 @@ function render(myLibrary, tableID){
     var head2 = headRow.insertCell(2);
     var head3 = headRow.insertCell(3);
 
-    head0.innerHTML = "<b>Title</b>";
-    head1.innerHTML = "<b>Author</b>";
-    head2.innerHTML = "<b>Pages</b>";
-    head3.innerHTML = "<b>Read</b>";
+    head0.innerHTML = "<b>Read?</b>";
+    head1.innerHTML = "<b>Title</b>";
+    head2.innerHTML = "<b>Author</b>";
+    head3.innerHTML = "<b>Pages</b>";
 
     //Print table results
     let i;
@@ -43,7 +48,7 @@ function render(myLibrary, tableID){
         let cell2 = row.insertCell(2);
         let cell3 = row.insertCell(3);
 
-        cell0.innerHTML = myLibrary[i][0];
+        cell0.innerHTML = myLibrary[i][4];
         cell1.innerHTML = myLibrary[i][1];
         cell2.innerHTML = myLibrary[i][2];
         cell3.innerHTML = myLibrary[i][3];
@@ -81,3 +86,5 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
 
 }
 );
+
+console.log(myLibrary)
