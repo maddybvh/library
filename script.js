@@ -80,18 +80,17 @@ function addRemoveListeners() {
 }
 function removeBook(selectedRow) {
     const bookTitle = selectedRow.children[1].innerHTML; // gets title of book on row
-    table.deleteRow(selectedRow.rowIndex);               // removes row from table
-    for (i = 0; i < myLibrary.length; i++) {   
+    for (i = 0; i <= myLibrary.length; i++) {   
         if (myLibrary[i].title == bookTitle) {       
             myLibrary.splice(i, 1); 
         }
     }
+    render(myLibrary);
 }
 
 function addReadListeners() {
     document.querySelectorAll(".readCheckbox").forEach((input) =>{
         input.addEventListener("click", () => {
-            console.log("read success")
             toggleRead(input.parentElement.parentElement); // passes same row as remove button
         })
     })
