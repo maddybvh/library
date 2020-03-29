@@ -33,10 +33,18 @@ function render(myLibrary, tableID){
     let cell3 = row.insertCell(3);
     let cell4 = row.insertCell(4);
 
-    cell0.innerHTML = myLibrary[myLibrary.length - 1][4];
+    // render checkbox for Read boolean
+    let x = document.createElement("INPUT");
+    x.setAttribute("type", "checkbox");
+    x.checked = myLibrary[myLibrary.length - 1][4];
+    cell0.appendChild(x);
+    
+    //Render the rest of the book info
     cell1.innerHTML = myLibrary[myLibrary.length - 1][1];
     cell2.innerHTML = myLibrary[myLibrary.length - 1][2];
     cell3.innerHTML = myLibrary[myLibrary.length - 1][3];
+
+    //Render delete button
     cell4.innerHTML = "<button onclick='removeRow(this)'>x</button>";
 }
 
@@ -56,10 +64,9 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
 }
 );
 
-//Event listener for deleting books
+//Event listener for deleting book rows from the rendered table
 removeRow = function(cellToRemove) {
     p = cellToRemove.parentNode.parentNode;
     console.log(p);
-    p.parentNode.removeChild(p);
-          
+    p.parentNode.removeChild(p);          
 }
