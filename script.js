@@ -9,20 +9,20 @@ function Book(title, author, pages, readYet) {
     this.author = author
     this.pages = pages
     this.readYet = readYet
-    this.info = function() {
-        return [this.title, this.author, this.pages, this.readYet]
-  }
 }
 
-function addBookToLibrary(newBook) {
-  myLibrary.push(newBook.info());
+function addBookToLibrary(book) {
+  myLibrary.push(book);
   render(myLibrary);
 }
 
 function render(myLibrary) {
     
-    for (let book of myLibrary) {
-        var row = table.insertRow(-1);
+    clearTable();
+
+    for (book of myLibrary) {
+
+        var row = table.insertRow(1);
 
         let cell0 = row.insertCell(0);
         let cell1 = row.insertCell(1);
@@ -36,15 +36,22 @@ function render(myLibrary) {
         
         cell0.appendChild(x);
 
-        cell1.innerHTML = this.title;
-        cell2.innerHTML = this.author;
-        cell3.innerHTML = this.pages;
+        cell1.innerHTML = book.title;
+        cell2.innerHTML = book.author;
+        cell3.innerHTML = book.pages;
         cell4.innerHTML = "<button class='remove'>x</button>";
-
-        addRemoveListeners();
-        addReadListeners();
     }    
 };
+
+//
+function clearTable() {
+    var tableHeaderRowCount = 1;
+    var table = document.getElementById('tableOfBooks');
+    var rowCount = table.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        table.deleteRow(tableHeaderRowCount);
+    }
+}
 
 //Event listener for add new book
 document.getElementById("addNewBookButton").addEventListener('click', (e) => {
@@ -54,8 +61,8 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
     pages = document.getElementById("pages").value;
     readYet = document.getElementById("readYet").checked;
     
-    let newBook = new Book(title, author, pages, readYet);
-    addBookToLibrary(newBook);
+    let book = new Book(title, author, pages, readYet);
+    addBookToLibrary(book);
 }
 );
 
@@ -77,12 +84,5 @@ function removeBook(selectedRow) {
             myLibrary.splice(i, 1); 
         }
     }
-}
 
-function addReadListeners() {
-    document.querySelectorAll(".checkbox").forEach((checkbox) => {
-        select.addEventListener("change", () => {
-            updatedReadStatus(selectedRow);
-        })
-    })
 }
