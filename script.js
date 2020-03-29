@@ -39,7 +39,9 @@ function render(myLibrary) {
         cell1.innerHTML = book.title;
         cell2.innerHTML = book.author;
         cell3.innerHTML = book.pages;
-        cell4.innerHTML = "<button class='remove'>x</button>";
+        cell4.innerHTML = "<button class='removeButton'>x</button>";
+
+        addRemoveListeners();
     }    
 };
 
@@ -68,19 +70,17 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
 
 
 function addRemoveListeners() {
-    document.querySelectorAll(".remove").forEach((button) => {
+    document.querySelectorAll(".removeButton").forEach((button) => {
         button.addEventListener("click", () => {
-            removeBook(button.parentElement.parentElement);
+            removeBook(button.parentElement.parentElement); // passes same row as remove button
         })
     })
 }
-
 function removeBook(selectedRow) {
-    const bookTitle = selectedRow.children[0].innerHTML; // gets title of book on row
+    const bookTitle = selectedRow.children[1].innerHTML; // gets title of book on row
     table.deleteRow(selectedRow.rowIndex);               // removes row from table
-
-    for (i = 0; i < myLibrary.length; i++) {             // finds book title in myLibrary
-        if (myLibrary[i].title == bookTitle) {           // and splices out book
+    for (i = 0; i < myLibrary.length; i++) {   
+        if (myLibrary[i].title == bookTitle) {       
             myLibrary.splice(i, 1); 
         }
     }
