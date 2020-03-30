@@ -97,13 +97,13 @@ function addReadListeners() {
     })
 }
 
+//Update the readYet boolean
 function toggleRead(selectedRow) {
     const bookTitle = selectedRow.children[1].innerHTML;
     for (i = 0; i < myLibrary.length; i++) {   
         if (myLibrary[i].title == bookTitle) {                   
             x = myLibrary[i].readYet
             myLibrary[i].readYet = !x
-            console.log(myLibrary[i].readYet)
         }
     }    
 }
