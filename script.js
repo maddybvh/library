@@ -89,6 +89,7 @@ function removeBook(selectedRow) {
             myLibrary.splice(i, 1); 
         }
     }
+    dbRefMyLibrary.set(myLibrary);
     render(myLibrary);
 }
 
@@ -108,7 +109,8 @@ function toggleRead(selectedRow) {
             x = myLibrary[i].readYet
             myLibrary[i].readYet = !x
         }
-    }    
+    }
+    dbRefMyLibrary.set(myLibrary);    
 }
 
 // Your web app's Firebase configuration
