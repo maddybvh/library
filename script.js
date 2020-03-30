@@ -12,8 +12,10 @@ function Book(title, author, pages, readYet) {
 }
 
 function addBookToLibrary(book) {
-  myLibrary.push(book);
-  render(myLibrary);
+    myLibrary.push(book);
+    render(myLibrary);
+    //Sync object changes
+    dbRefMyLibrary.set(myLibrary);
 }
 
 function render(myLibrary) {
@@ -107,3 +109,21 @@ function toggleRead(selectedRow) {
         }
     }    
 }
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyCMWpZHykIm8csWoASnLZHUSGHvu0FACHs",
+    authDomain: "odin-library-71d18.firebaseapp.com",
+    databaseURL: "https://odin-library-71d18.firebaseio.com",
+    projectId: "odin-library-71d18",
+    storageBucket: "odin-library-71d18.appspot.com",
+    messagingSenderId: "781349978019",
+    appId: "1:781349978019:web:e0b5c6383a41b59cda2416",
+    measurementId: "G-ET9XV2ZPGS"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+//Create references
+const dbRefMyLibrary = firebase.database().ref().child('myLibrary');
+
