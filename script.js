@@ -1,6 +1,7 @@
 
 const table = document.getElementById("tableOfBooks");
 
+var myLibrary = [];
 
 function Book(title, author, pages, readYet) {
 
@@ -13,6 +14,7 @@ function Book(title, author, pages, readYet) {
 function addBookToLibrary(book) {
     myLibrary.push(book);
     render(myLibrary);
+    
     //Sync object changes
     dbRefMyLibrary.set(myLibrary);
 }
@@ -125,16 +127,11 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Create references
-const dbRefMyLibrary = firebase.database().ref().child('myLibrary');
+var dbRefMyLibrary = firebase.database().ref().child('myLibrary');
 
-// If a DB reference exists, load it
-
-myLibrary = dbRefMyLibrary.once('value').then(function(snapshot) {
-    myLibrary = JSON.stringify(snapshot.val(), null, 3);
+// If a DB reference exists, load myLibrary from DB
+dbRefMyLibrary.once('value').then(function(snapshot) {
+  myLibrary = (snapshot.val());
+  render(myLibrary)
 });
 
-if (myLibrary == null){
-    myLibrary = [];
-}
-
-console.log(myLibrary)
