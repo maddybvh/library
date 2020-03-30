@@ -64,6 +64,7 @@ document.getElementById("addNewBookButton").addEventListener('click', (e) => {
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
     readYet = document.getElementById("readYet").checked;
+    document.forms["newBookForm"].reset();
     
     let book = new Book(title, author, pages, readYet);
     addBookToLibrary(book);
