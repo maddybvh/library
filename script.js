@@ -1,4 +1,3 @@
-let myLibrary = [];
 
 const table = document.getElementById("tableOfBooks");
 
@@ -121,9 +120,21 @@ var firebaseConfig = {
     appId: "1:781349978019:web:e0b5c6383a41b59cda2416",
     measurementId: "G-ET9XV2ZPGS"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-//Create references
+// Create references
 const dbRefMyLibrary = firebase.database().ref().child('myLibrary');
 
+// If a DB reference exists, load it
+
+myLibrary = dbRefMyLibrary.once('value').then(function(snapshot) {
+    myLibrary = JSON.stringify(snapshot.val(), null, 3);
+});
+
+if (myLibrary == null){
+    myLibrary = [];
+}
+
+console.log(myLibrary)
