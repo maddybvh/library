@@ -80,7 +80,6 @@ function addRemoveListeners() {
 }
 function removeBook(selectedRow) {
     const bookTitle = selectedRow.children[1].innerHTML; // gets title of book on row
-    console.log(bookTitle);
     for (i = 0; i < myLibrary.length; i++) {   
         if (myLibrary[i].title == bookTitle) {       
             myLibrary.splice(i, 1); 
